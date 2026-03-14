@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D UI Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            min-height: 100vh;
+            perspective: 1000px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+            transform: translateZ(0);
+        }
+        
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transform: rotateX(10deg);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            transform: rotateX(5deg);
+        }
+        
+        .three-d-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            transform-style: preserve-3d;
+            transition: all 0.5s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .three-d-card:hover {
+            transform: translateZ(30px) rotateY(5deg);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+        
+        .three-d-card h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .three-d-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            transform-style: preserve-3d;
+        }
+        
+        .three-d-item {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .three-d-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateZ(-10px);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .three-d-item:hover::before {
+            opacity: 1;
+        }
+        
+        .three-d-item:hover {
+            transform: translateZ(20px) rotateX(5deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .three-d-item i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #00d2ff, #3a7bd5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 5px 15px rgba(0,210,255,0.3);
+        }
+        
+        .three-d-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .three-d-item p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+        
+        .three-d-button {
+            background: linear-gradient(45deg, #00d2ff, #3a7bd5);
+            border: none;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.5s ease;
+            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3);
+            transform-style: preserve-3d;
+        }
+        
+        .three-d-button:hover {
+            transform: translateZ(10px) translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 210, 255, 0.5);
+        }
+        
+        .three-d-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            transform-style: preserve-3d;
+        }
+        
+        .three-d-form input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 1rem;
+            color: white;
+            font-size: 1rem;
+            transform-style: preserve-3d;
+            transition: all 0.5s ease;
+        }
+        
+        .three-d-form input:focus {
+            outline: none;
+            border-color: #00d2ff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 210, 255, 0.25);
+            transform: translateZ(5px);
+        }
+        
+        .three-d-form button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+        }
+        
+        .three-d-form button:hover {
+            transform: translateZ(10px) translateY(-3px);
+            box-shadow: 0 10px 25px rgba(238, 90, 36, 0.4);
+        }
+        
+        .three-d-table {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 1rem;
+            transform-style: preserve-3d;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .three-d-table th, .three-d-table td {
+            padding: 1rem;
+            text-align: left;
+            color: white;
+            transform-style: preserve-3d;
+        }
+        
+        .three-d-table th {
+            background: rgba(0, 210, 255, 0.2);
+            font-weight: 600;
+            border-bottom: 2px solid rgba(0, 210, 255, 0.3);
+        }
+        
+        .three-d-table tr {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .three-d-table tr:last-child {
+            border-bottom: none;
+        }
+        
+        .three-d-table tr:hover {
+            background: rgba(0, 210, 255, 0.1);
+        }
+        
+        .three-d-progress {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+        
+        .three-d-progress-bar {
+            height: 100%;
+            background: linear-gradient(45deg, #00d2ff, #3a7bd5);
+            border-radius: 4px;
+            transform-style: preserve-3d;
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+        }
+        
+        .three-d-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            transform-style: preserve-3d;
+        }
+        
+        .three-d-tab {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+        
+        .three-d-tab::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #00d2ff, #3a7bd5);
+            opacity: 0;
+            transform: translateZ(-10px);
+            transition: opacity 0.5s ease;
+            border-radius: 10px;
+        }
+        
+        .three-d-tab:hover::after {
+            opacity: 0.1;
+        }
+        
+        .three-d-tab.active {
+            background: linear-gradient(45deg, #00d2ff, #3a7bd5);
+            border-color: #00d2ff;
+            transform: translateZ(5px);
+        }
+        
+        .three-d-content {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transform-style: preserve-3d;
+        }
+        
+        .three-d-stat-card {
+            background: linear-gradient(135deg, rgba(0, 210, 255, 0.2) 0%, rgba(58, 123, 213, 0.2) 100%);
+            border-radius: 15px;
+            padding: 1.5rem;
+            color: white;
+            text-align: center;
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+            border: 1px solid rgba(0, 210, 255, 0.3);
+        }
+        
+        .three-d-stat-card:hover {
+            transform: translateZ(20px) rotateX(5deg);
+            box-shadow: 0 15px 30px rgba(0, 210, 255, 0.3);
+        }
+        
+        .three-d-stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .three-d-stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .three-d-icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem auto;
+            transform-style: preserve-3d;
+            transition: all 0.5s ease;
+        }
+        
+        .three-d-icon-circle i {
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .three-d-icon-circle:hover {
+            transform: translateZ(20px) rotateZ(360deg);
+            background: rgba(0, 210, 255, 0.3);
+        }
+        
+        .three-d-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 210, 255, 0.3), transparent);
+            margin: 2rem 0;
+            transform-style: preserve-3d;
+        }
+        
+        .three-d-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transform-style: preserve-3d;
+            transition: all 0.5s ease;
+        }
+        
+        .three-d-badge:hover {
+            transform: translateZ(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .three-d-badge.primary {
+            background: rgba(0, 210, 255, 0.3);
+        }
+        
+        .three-d-badge.success {
+            background: rgba(46, 213, 115, 0.3);
+        }
+        
+        .three-d-badge.warning {
+            background: rgba(255, 193, 7, 0.3);
+        }
+        
+        .three-d-badge.danger {
+            background: rgba(220, 53, 69, 0.3);
+        }
+        
+        .three-d-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            transform-style: preserve-3d;
+        }
+        
+        .three-d-card-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .three-d-card-feature:hover {
+            transform: translateZ(20px) rotateY(5deg);
+            border-color: #00d2ff;
+        }
+        
+        .three-d-card-feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transform-style: preserve-3d;
+        }
+        
+        .three-d-card-feature-icon i {
+            font-size: 1.2rem;
+            color: white;
+        }
+        
+        .three-d-card-feature-content h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .three-d-card-feature-content p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+        
+        .three-d-footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            transform-style: preserve-3d;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .three-d-footer p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .floating-3d {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            transform-style: preserve-3d;
+        }
+        
+        .cube {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: rgba(0, 210, 255, 0.1);
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            transform-style: preserve-3d;
+            animation: float3d 20s infinite ease-in-out;
+        }
+        
+        @keyframes float3d {
+            0%, 100% {
+                transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg);
+            }
+            25% {
+                transform: translate3d(100px, -50px, 50px) rotateX(90deg) rotateY(90deg);
+            }
+            50% {
+                transform: translate3d(-100px, 50px, -50px) rotateX(180deg) rotateY(180deg);
+            }
+            75% {
+                transform: translate3d(50px, -100px, -100px) rotateX(270deg) rotateY(270deg);
+            }
+        }
+        
+        .three-d-shadow {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 20px;
+            background: radial-gradient(ellipse, rgba(0,0,0,0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-3d">
+        <div class="cube" style="top: 10%; left: 10%; animation-delay: 0s;"></div>
+        <div class="cube" style="top: 30%; right: 10%; animation-delay: 2s;"></div>
+        <div class="cube" style="bottom: 20%; left: 20%; animation-delay: 4s;"></div>
+        <div class="cube" style="bottom: 40%; right: 30%; animation-delay: 6s;"></div>
+    </div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>3D UI Design</h1>
+            <p>Immersive, dimensional, and futuristic interface</p>
+        </div>
+        
+        <div class="three-d-card">
+            <h2>Dashboard Overview</h2>
+            <div class="three-d-grid">
+                <div class="three-d-item">
+                    <div class="three-d-icon-circle">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Analytics</h3>
+                    <p>Real-time data visualization</p>
+                </div>
+                <div class="three-d-item">
+                    <div class="three-d-icon-circle">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Users</h3>
+                    <p>Active user management</p>
+                </div>
+                <div class="three-d-item">
+                    <div class="three-d-icon-circle">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Growth</h3>
+                    <p>Performance metrics</p>
+                </div>
+                <div class="three-d-item">
+                    <div class="three-d-icon-circle">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Speed</h3>
+                    <p>Fast and responsive</p>
+                </div>
+            </div>
+            
+            <div class="three-d-card-grid">
+                <div class="three-d-stat-card">
+                    <div class="three-d-stat-number">1,234</div>
+                    <div class="three-d-stat-label">Total Users</div>
+                </div>
+                <div class="three-d-stat-card">
+                    <div class="three-d-stat-number">89%</div>
+                    <div class="three-d-stat-label">Satisfaction</div>
+                </div>
+                <div class="three-d-stat-card">
+                    <div class="three-d-stat-number">456</div>
+                    <div class="three-d-stat-label">Active Sessions</div>
+                </div>
+            </div>
+            
+            <div class="three-d-form">
+                <input type="text" placeholder="Search or filter...">
+                <button class="three-d-button">Apply Filter</button>
+            </div>
+        </div>
+        
+        <div class="three-d-card">
+            <h2>Data Table</h2>
+            <table class="three-d-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Value</th>
+                        <th>Progress</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Design</td>
+                        <td>85%</td>
+                        <td>
+                            <div class="three-d-progress">
+                                <div class="three-d-progress-bar" style="width: 85%"></div>
+                            </div>
+                        </td>
+                        <td><span class="three-d-badge primary">Active</span></td>
+                    </tr>
+                    <tr>
+                        <td>Development</td>
+                        <td>92%</td>
+                        <td>
+                            <div class="three-d-progress">
+                                <div class="three-d-progress-bar" style="width: 92%"></div>
+                            </div>
+                        </td>
+                        <td><span class="three-d-badge primary">Active</span></td>
+                    </tr>
+                    <tr>
+                        <td>Marketing</td>
+                        <td>78%</td>
+                        <td>
+                            <div class="three-d-progress">
+                                <div class="three-d-progress-bar" style="width: 78%"></div>
+                            </div>
+                        </td>
+                        <td><span class="three-d-badge warning">Pending</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="three-d-card">
+            <h2>Content Tabs</h2>
+            <div class="three-d-tabs">
+                <div class="three-d-tab active">Overview</div>
+                <div class="three-d-tab">Details</div>
+                <div class="three-d-tab">Statistics</div>
+                <div class="three-d-tab">Settings</div>
+            </div>
+            <div class="three-d-content">
+                <p>This is the content for the active tab. The 3D design creates a sense of depth and dimensionality, making the interface feel immersive and futuristic.</p>
+            </div>
+        </div>
+        
+        <div class="three-d-card">
+            <h2>Key Features</h2>
+            <div class="three-d-card-grid">
+                <div class="three-d-card-feature">
+                    <div class="three-d-card-feature-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <div class="three-d-card-feature-content">
+                        <h4>Modern Design</h4>
+                        <p>Clean and contemporary interface with thoughtful typography and spacing.</p>
+                    </div>
+                </div>
+                <div class="three-d-card-feature">
+                    <div class="three-d-card-feature-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="three-d-card-feature-content">
+                        <h4>User-Friendly</h4>
+                        <p>Intuitive navigation and clear visual hierarchy for better user experience.</p>
+                    </div>
+                </div>
+                <div class="three-d-card-feature">
+                    <div class="three-d-card-feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="three-d-card-feature-content">
+                        <h4>Performance</h4>
+                        <p>Optimized for speed and efficiency with minimal loading times.</p>
+                    </div>
+                </div>
+                <div class="three-d-card-feature">
+                    <div class="three-d-card-feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="three-d-card-feature-content">
+                        <h4>Secure</h4>
+                        <p>Built with security in mind, protecting user data and privacy.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="three-d-footer">
+            <p>© 2024 3D UI Design. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

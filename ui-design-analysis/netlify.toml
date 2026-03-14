@@ -1,0 +1,24 @@
+[[redirects]]
+  from = "/*"
+  to = "/style1-glassmorphism.html"
+  status = 200
+
+[[redirects]]
+  from = "/style2-gradient.html"
+  to = "/style2-gradient.html"
+  status = 200
+
+[[redirects]]
+  from = "/style3-minimal.html"
+  to = "/style3-minimal.html"
+  status = 200
+
+[[redirects]]
+  from = "/style4-3d.html"
+  to = "/style4-3d.html"
+  status = 200
+
+[[redirects]]
+  from = "/style5-handdrawn.html"
+  to = "/style5-handdrawn.html"
+  status = 200

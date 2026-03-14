@@ -1,0 +1,779 @@
+/* 手绘设计 - 专用样式 */
+:root {
+    --handdrawn-primary: #fbbf24;
+    --handdrawn-secondary: #fb923c;
+    --handdrawn-accent: #f87171;
+    --handdrawn-background: #fefce8;
+    --handdrawn-surface: #ffffff;
+    --handdrawn-text: #92400e;
+    --handdrawn-text-secondary: #78350f;
+    --handdrawn-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --handdrawn-hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.handdrawn-header {
+    background: var(--handdrawn-background);
+    color: var(--handdrawn-text);
+    padding: 3rem 0;
+    text-align: center;
+    box-shadow: var(--handdrawn-shadow);
+    border-bottom: 3px dashed var(--handdrawn-primary);
+}
+
+.handdrawn-nav {
+    background: var(--handdrawn-surface);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px dashed var(--handdrawn-secondary);
+}
+
+.handdrawn-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+}
+
+.handdrawn-nav li {
+    margin: 0 1.5rem;
+}
+
+.handdrawn-nav a {
+    text-decoration: none;
+    color: var(--handdrawn-text);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.handdrawn-nav a:hover {
+    background: var(--handdrawn-primary);
+    color: white;
+    transform: translateY(-2px);
+    border: 2px dashed white;
+}
+
+.handdrawn-section {
+    margin: 4rem 0;
+    padding: 2rem 0;
+}
+
+.handdrawn-card {
+    background: var(--handdrawn-surface);
+    border: 2px solid var(--handdrawn-primary);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: var(--handdrawn-shadow);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.handdrawn-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 2px dashed var(--handdrawn-secondary);
+    border-radius: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.handdrawn-card:hover::before {
+    opacity: 1;
+}
+
+.handdrawn-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--handdrawn-hover-shadow);
+}
+
+.handdrawn-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.handdrawn-content h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: var(--handdrawn-text);
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.handdrawn-content p {
+    color: var(--handdrawn-text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.handdrawn-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.handdrawn-feature {
+    background: var(--handdrawn-background);
+    border: 2px solid var(--handdrawn-secondary);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.handdrawn-feature::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px dashed transparent;
+    border-radius: 1rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.handdrawn-feature:hover::after {
+    border-color: var(--handdrawn-primary);
+    opacity: 1;
+}
+
+.handdrawn-feature:hover {
+    background: var(--handdrawn-primary);
+    color: white;
+    transform: translateY(-3px);
+}
+
+.handdrawn-feature i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--handdrawn-secondary);
+}
+
+.handdrawn-feature h4 {
+    color: var(--handdrawn-text);
+    margin-bottom: 0.5rem;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.handdrawn-feature p {
+    color: var(--handdrawn-text-secondary);
+    font-size: 0.9rem;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.handdrawn-palette {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.handdrawn-color-item {
+    text-align: center;
+    position: relative;
+}
+
+.handdrawn-color-swatch {
+    width: 100%;
+    height: 60px;
+    border-radius: 0.75rem;
+    margin-bottom: 0.5rem;
+    box-shadow: var(--handdrawn-shadow);
+    border: 2px solid var(--handdrawn-text);
+    position: relative;
+}
+
+.handdrawn-color-swatch::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 2px dashed var(--handdrawn-text);
+    border-radius: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.handdrawn-color-item:hover .handdrawn-color-swatch::after {
+    opacity: 1;
+}
+
+.handdrawn-color-item span {
+    display: block;
+    color: var(--handdrawn-text);
+    font-size: 0.9rem;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.handdrawn-color-tips {
+    background: var(--handdrawn-background);
+    border: 2px solid var(--handdrawn-secondary);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+.handdrawn-color-tips h4 {
+    color: var(--handdrawn-text);
+    margin-bottom: 1rem;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.handdrawn-color-tips ul {
+    list-style: none;
+}
+
+.handdrawn-color-tips li {
+    color: var(--handdrawn-text-secondary);
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    position: relative;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.handdrawn-color-tips li::before {
+    content: '✏️';
+    position: absolute;
+    left: 0;
+    color: var(--handdrawn-primary);
+    font-weight: bold;
+}
+
+.handdrawn-demo {
+    display: flex;
+    gap: 1.5rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.handdrawn-button {
+    background: var(--handdrawn-surface);
+    border: 2px solid var(--handdrawn-primary);
+    border-radius: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    color: var(--handdrawn-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-family: 'Comic Sans MS', cursive;
+    position: relative;
+}
+
+.handdrawn-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -2px;
+    right: -2px;
+    bottom: 0;
+    border: 2px dashed var(--handdrawn-secondary);
+    border-radius: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.handdrawn-button:hover::before {
+    opacity: 1;
+}
+
+.handdrawn-button:hover {
+    background: var(--handdrawn-primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--handdrawn-hover-shadow);
+}
+
+.handdrawn-draw {
+    border-color: var(--handdrawn-secondary);
+}
+
+.handdrawn-draw:hover {
+    border-color: var(--handdrawn-secondary);
+}
+
+.handdrawn-shake:hover {
+    animation: handdrawn-shake 0.5s ease;
+}
+
+@keyframes handdrawn-shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.handdrawn-animation {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.handdrawn-animation-item {
+    background: var(--handdrawn-background);
+    border: 2px solid var(--handdrawn-secondary);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.handdrawn-animation-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px dashed transparent;
+    border-radius: 0.75rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.handdrawn-animation-item:hover::after {
+    border-color: var(--handdrawn-primary);
+    opacity: 1;
+}
+
+.handdrawn-animation-item:hover {
+    background: var(--handdrawn-primary);
+    color: white;
+    transform: translateY(-3px);
+}
+
+.handdrawn-animation-item i {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--handdrawn-secondary);
+}
+
+.handdrawn-animation-item span {
+    color: var(--handdrawn-text);
+    font-size: 0.9rem;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.handdrawn-device-preview {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.handdrawn-device-container {
+    display: inline-block;
+    background: #1a1a1a;
+    border-radius: 2rem;
+    padding: 1rem;
+    box-shadow: var(--handdrawn-shadow);
+}
+
+.handdrawn-device-screen {
+    background: var(--handdrawn-surface);
+    border: 2px solid var(--handdrawn-primary);
+    border-radius: 1.5rem;
+    width: 320px;
+    height: 568px;
+    position: relative;
+    overflow: hidden;
+}
+
+.handdrawn-mobile-card {
+    padding: 1.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: var(--handdrawn-background);
+    color: var(--handdrawn-text);
+    border: 2px solid var(--handdrawn-secondary);
+}
+
+.handdrawn-mobile-card h4 {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.handdrawn-mobile-card p {
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.handdrawn-mobile-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    width: 100%;
+}
+
+.handdrawn-mobile-item {
+    background: var(--handdrawn-surface);
+    border: 2px solid var(--handdrawn-secondary);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.handdrawn-mobile-item:hover {
+    background: var(--handdrawn-primary);
+    color: white;
+    border-color: var(--handdrawn-primary);
+    transform: translateY(-3px);
+}
+
+.handdrawn-mobile-item i {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--handdrawn-secondary);
+}
+
+.handdrawn-mobile-item span {
+    color: var(--handdrawn-text);
+    font-size: 0.85rem;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.handdrawn-responsive-tips {
+    background: var(--handdrawn-background);
+    border: 2px solid var(--handdrawn-secondary);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+.handdrawn-responsive-tips h4 {
+    color: var(--handdrawn-text);
+    margin-bottom: 1rem;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.handdrawn-responsive-tips ul {
+    list-style: none;
+}
+
+.handdrawn-responsive-tips li {
+    color: var(--handdrawn-text-secondary);
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    position: relative;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.handdrawn-responsive-tips li::before {
+    content: '✏️';
+    position: absolute;
+    left: 0;
+    color: var(--handdrawn-primary);
+    font-weight: bold;
+}
+
+.handdrawn-components-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.handdrawn-component-card {
+    background: var(--handdrawn-background);
+    border: 2px solid var(--handdrawn-secondary);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.handdrawn-component-card:hover {
+    background: var(--handdrawn-primary);
+    color: white;
+    transform: translateY(-3px);
+}
+
+.handdrawn-component-card h4 {
+    color: var(--handdrawn-text);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.handdrawn-component {
+    margin-top: 1rem;
+}
+
+.handdrawn-card-component {
+    background: var(--handdrawn-surface);
+    border: 2px solid var(--handdrawn-primary);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    text-align: center;
+    color: var(--handdrawn-text);
+}
+
+.handdrawn-card-component h5 {
+    color: var(--handdrawn-text);
+    margin-bottom: 0.5rem;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.handdrawn-card-component p {
+    color: var(--handdrawn-text-secondary);
+    font-size: 0.9rem;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.handdrawn-button-component {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    justify-content: center;
+}
+
+.handdrawn-btn {
+    background: var(--handdrawn-primary);
+    color: white;
+    border: 2px solid var(--handdrawn-primary);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.handdrawn-btn.secondary {
+    background: var(--handdrawn-surface);
+    color: var(--handdrawn-primary);
+    border-color: var(--handdrawn-secondary);
+}
+
+.handdrawn-btn:hover {
+    background: var(--handdrawn-secondary);
+    border-color: var(--handdrawn-secondary);
+    transform: translateY(-2px);
+    box-shadow: var(--handdrawn-hover-shadow);
+}
+
+.handdrawn-nav-component ul {
+    list-style: none;
+    padding: 0;
+}
+
+.handdrawn-nav-component li {
+    background: var(--handdrawn-background);
+    border: 2px solid var(--handdrawn-secondary);
+    border-radius: 0.5rem;
+    margin: 0.5rem 0;
+    padding: 0.75rem 1rem;
+    color: var(--handdrawn-text);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.handdrawn-nav-component li.active {
+    background: var(--handdrawn-primary);
+    color: white;
+    border-color: var(--handdrawn-primary);
+}
+
+.handdrawn-nav-component li:hover {
+    background: var(--handdrawn-primary);
+    color: white;
+    border-color: var(--handdrawn-primary);
+    transform: translateX(5px);
+}
+
+.handdrawn-form-component {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-direction: column;
+}
+
+.handdrawn-form-component input {
+    flex: 1;
+    background: var(--handdrawn-surface);
+    border: 2px solid var(--handdrawn-secondary);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    color: var(--handdrawn-text);
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.handdrawn-form-component input::placeholder {
+    color: var(--handdrawn-text-secondary);
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.handdrawn-code-block {
+    background: #fefce8;
+    border: 2px solid var(--handdrawn-secondary);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    overflow-x: auto;
+}
+
+code {
+    color: var(--handdrawn-text);
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.handdrawn-code-tips {
+    background: var(--handdrawn-background);
+    border: 2px solid var(--handdrawn-secondary);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+.handdrawn-code-tips h4 {
+    color: var(--handdrawn-text);
+    margin-bottom: 1rem;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.handdrawn-code-tips ul {
+    list-style: none;
+}
+
+.handdrawn-code-tips li {
+    color: var(--handdrawn-text-secondary);
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    position: relative;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.handdrawn-code-tips li::before {
+    content: '✏️';
+    position: absolute;
+    left: 0;
+    color: var(--handdrawn-primary);
+    font-weight: bold;
+}
+
+.handdrawn-footer {
+    background: var(--handdrawn-text);
+    color: white;
+    padding: 2rem 0;
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.handdrawn-footer p {
+    opacity: 0.8;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+/* 手绘元素样式 */
+.handdrawn-element {
+    border: 2px solid var(--handdrawn-primary);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.handdrawn-element::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 2px dashed var(--handdrawn-secondary);
+    border-radius: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.handdrawn-element:hover::before {
+    opacity: 1;
+}
+
+.handdrawn-button-handdrawn {
+    background: white;
+    border: 2px solid var(--handdrawn-primary);
+    border-radius: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    color: var(--handdrawn-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+.handdrawn-button-handdrawn:hover {
+    background: var(--handdrawn-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .handdrawn-content {
+        padding: 0 1rem;
+    }
+    
+    .handdrawn-features {
+        grid-template-columns: 1fr;
+    }
+    
+    .handdrawn-palette {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .handdrawn-animation {
+        grid-template-columns: 1fr;
+    }
+    
+    .handdrawn-device-screen {
+        width: 280px;
+        height: 498px;
+    }
+    
+    .handdrawn-components-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .handdrawn-header h1 {
+        font-size: 1.75rem;
+    }
+    
+    .handdrawn-nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .handdrawn-nav li {
+        margin: 0;
+    }
+    
+    .handdrawn-device-screen {
+        width: 240px;
+        height: 426px;
+    }
+}

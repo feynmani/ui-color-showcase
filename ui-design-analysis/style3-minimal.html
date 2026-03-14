@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal UI Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            padding: 2rem;
+            color: #212529;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #343a40;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            color: #6c757d;
+        }
+        
+        .minimal-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .minimal-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .minimal-card h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #343a40;
+        }
+        
+        .minimal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .minimal-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+        
+        .minimal-item:hover {
+            border-color: #007bff;
+            transform: translateY(-3px);
+        }
+        
+        .minimal-item i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #007bff;
+        }
+        
+        .minimal-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #343a40;
+        }
+        
+        .minimal-item p {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .minimal-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 123, 255, 0.1);
+        }
+        
+        .minimal-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 123, 255, 0.2);
+        }
+        
+        .minimal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .minimal-form input {
+            padding: 1rem;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .minimal-form input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+        
+        .minimal-form button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .minimal-form button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+        
+        .minimal-table {
+            width: 100%;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .minimal-table th, .minimal-table td {
+            padding: 1rem;
+            text-align: left;
+            color: #495057;
+        }
+        
+        .minimal-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            border-bottom: 2px solid #dee2e6;
+        }
+        
+        .minimal-table tr {
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .minimal-table tr:last-child {
+            border-bottom: none;
+        }
+        
+        .minimal-table tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .minimal-progress {
+            height: 8px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+        
+        .minimal-progress-bar {
+            height: 100%;
+            background-color: #007bff;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        .minimal-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .minimal-tab {
+            padding: 0.8rem 1.5rem;
+            color: #6c757d;
+            cursor: pointer;
+            border-radius: 8px 8px 0 0;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .minimal-tab:hover {
+            color: #007bff;
+            background-color: #f8f9fa;
+        }
+        
+        .minimal-tab.active {
+            color: #007bff;
+            border-bottom: 3px solid #007bff;
+            background-color: white;
+        }
+        
+        .minimal-content {
+            background-color: white;
+            border-radius: 0 0 10px 10px;
+            padding: 1.5rem;
+            border: 1px solid #dee2e6;
+            border-top: none;
+        }
+        
+        .minimal-content p {
+            color: #495057;
+            line-height: 1.6;
+        }
+        
+        .minimal-stat-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+        
+        .minimal-stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .minimal-stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #343a40;
+        }
+        
+        .minimal-stat-label {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+        
+        .minimal-icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem auto;
+        }
+        
+        .minimal-icon-circle i {
+            font-size: 1.5rem;
+            color: #6c757d;
+        }
+        
+        .minimal-icon-circle.primary i {
+            color: #007bff;
+        }
+        
+        .minimal-icon-circle.success i {
+            color: #28a745;
+        }
+        
+        .minimal-icon-circle.warning i {
+            color: #ffc107;
+        }
+        
+        .minimal-icon-circle.danger i {
+            color: #dc3545;
+        }
+        
+        .minimal-divider {
+            height: 1px;
+            background-color: #e9ecef;
+            margin: 2rem 0;
+        }
+        
+        .minimal-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            background-color: #e9ecef;
+            color: #495057;
+        }
+        
+        .minimal-badge.primary {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+        
+        .minimal-badge.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .minimal-badge.warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .minimal-badge.danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .minimal-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .minimal-card-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        
+        .minimal-card-feature:hover {
+            border-color: #007bff;
+            transform: translateX(5px);
+        }
+        
+        .minimal-card-feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .minimal-card-feature-icon i {
+            font-size: 1.2rem;
+            color: #6c757d;
+        }
+        
+        .minimal-card-feature-content h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #343a40;
+        }
+        
+        .minimal-card-feature-content p {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .minimal-footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .minimal-footer p {
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Minimal UI Design</h1>
+            <p>Clean, simple, and focused interface design</p>
+        </div>
+        
+        <div class="minimal-card">
+            <h2>Dashboard Overview</h2>
+            <div class="minimal-grid">
+                <div class="minimal-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Analytics</h3>
+                    <p>Real-time data visualization</p>
+                </div>
+                <div class="minimal-item">
+                    <i class="fas fa-users"></i>
+                    <h3>Users</h3>
+                    <p>Active user management</p>
+                </div>
+                <div class="minimal-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <h3>Growth</h3>
+                    <p>Performance metrics</p>
+                </div>
+                <div class="minimal-item">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Speed</h3>
+                    <p>Fast and responsive</p>
+                </div>
+            </div>
+            
+            <div class="minimal-card-grid">
+                <div class="minimal-stat-card">
+                    <div class="minimal-stat-number">1,234</div>
+                    <div class="minimal-stat-label">Total Users</div>
+                </div>
+                <div class="minimal-stat-card">
+                    <div class="minimal-stat-number">89%</div>
+                    <div class="minimal-stat-label">Satisfaction</div>
+                </div>
+                <div class="minimal-stat-card">
+                    <div class="minimal-stat-number">456</div>
+                    <div class="minimal-stat-label">Active Sessions</div>
+                </div>
+            </div>
+            
+            <div class="minimal-form">
+                <input type="text" placeholder="Search or filter...">
+                <button class="minimal-button">Apply Filter</button>
+            </div>
+        </div>
+        
+        <div class="minimal-card">
+            <h2>Data Table</h2>
+            <table class="minimal-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Value</th>
+                        <th>Progress</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Design</td>
+                        <td>85%</td>
+                        <td>
+                            <div class="minimal-progress">
+                                <div class="minimal-progress-bar" style="width: 85%"></div>
+                            </div>
+                        </td>
+                        <td><span class="minimal-badge primary">Active</span></td>
+                    </tr>
+                    <tr>
+                        <td>Development</td>
+                        <td>92%</td>
+                        <td>
+                            <div class="minimal-progress">
+                                <div class="minimal-progress-bar" style="width: 92%"></div>
+                            </div>
+                        </td>
+                        <td><span class="minimal-badge primary">Active</span></td>
+                    </tr>
+                    <tr>
+                        <td>Marketing</td>
+                        <td>78%</td>
+                        <td>
+                            <div class="minimal-progress">
+                                <div class="minimal-progress-bar" style="width: 78%"></div>
+                            </div>
+                        </td>
+                        <td><span class="minimal-badge warning">Pending</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="minimal-card">
+            <h2>Content Tabs</h2>
+            <div class="minimal-tabs">
+                <div class="minimal-tab active">Overview</div>
+                <div class="minimal-tab">Details</div>
+                <div class="minimal-tab">Statistics</div>
+                <div class="minimal-tab">Settings</div>
+            </div>
+            <div class="minimal-content">
+                <p>This is the content for the active tab. The minimal design focuses on clarity and simplicity, removing unnecessary elements to create a clean and professional interface.</p>
+            </div>
+        </div>
+        
+        <div class="minimal-card">
+            <h2>Key Features</h2>
+            <div class="minimal-card-grid">
+                <div class="minimal-card-feature">
+                    <div class="minimal-card-feature-icon primary">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <div class="minimal-card-feature-content">
+                        <h4>Modern Design</h4>
+                        <p>Clean and contemporary interface with thoughtful typography and spacing.</p>
+                    </div>
+                </div>
+                <div class="minimal-card-feature">
+                    <div class="minimal-card-feature-icon success">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="minimal-card-feature-content">
+                        <h4>User-Friendly</h4>
+                        <p>Intuitive navigation and clear visual hierarchy for better user experience.</p>
+                    </div>
+                </div>
+                <div class="minimal-card-feature">
+                    <div class="minimal-card-feature-icon warning">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="minimal-card-feature-content">
+                        <h4>Performance</h4>
+                        <p>Optimized for speed and efficiency with minimal loading times.</p>
+                    </div>
+                </div>
+                <div class="minimal-card-feature">
+                    <div class="minimal-card-feature-icon danger">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="minimal-card-feature-content">
+                        <h4>Secure</h4>
+                        <p>Built with security in mind, protecting user data and privacy.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="minimal-footer">
+            <p>© 2024 Minimal UI Design. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI设计原型 - 5种风格</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .style-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .style-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        .style-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+
+        /* 方案一：现代简约风格 */
+        .modern-style {
+            background: #ffffff;
+        }
+
+        .modern-header {
+            background: #2196F3;
+            color: white;
+            padding: 15px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modern-sidebar {
+            background: #f8f9fa;
+            padding: 15px;
+            border-right: 1px solid #eee;
+            height: 400px;
+            overflow-y: auto;
+        }
+
+        .modern-content {
+            padding: 20px;
+            height: 400px;
+            overflow-y: auto;
+        }
+
+        .modern-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #eee;
+        }
+
+        /* 方案二：材质设计风格 */
+        .material-style {
+            background: #fafafa;
+        }
+
+        .material-header {
+            background: #673AB7;
+            color: white;
+            padding: 20px;
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .material-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .material-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #673AB7;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .fab:hover {
+            transform: scale(1.1);
+        }
+
+        /* 方案三：扁平化设计风格 */
+        .flat-style {
+            background: #FAFAFA;
+        }
+
+        .flat-header {
+            background: #FF5722;
+            color: white;
+            padding: 15px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .flat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .flat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #eee;
+            transition: transform 0.2s ease;
+        }
+
+        .flat-card:hover {
+            transform: translateY(-3px);
+            border-color: #FF5722;
+        }
+
+        /* 方案四：暗黑模式风格 */
+        .dark-style {
+            background: #121212;
+            color: #ffffff;
+        }
+
+        .dark-header {
+            background: #1E1E1E;
+            color: white;
+            padding: 15px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .dark-card {
+            background: #1E1E1E;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid #333;
+            transition: transform 0.2s ease;
+        }
+
+        .dark-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(187, 134, 252, 0.3);
+        }
+
+        /* 方案五：卡片式设计风格 */
+        .card-style {
+            background: #ffffff;
+        }
+
+        .card-header {
+            background: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .card-item {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .card-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .card-header-content {
+            background: #4CAF50;
+            color: white;
+            padding: 15px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-footer {
+            background: #f5f5f5;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s ease;
+        }
+
+        .btn-primary {
+            background: #2196F3;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1976D2;
+        }
+
+        .btn-secondary {
+            background: #673AB7;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5E35B1;
+        }
+
+        .btn-success {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #388E3C;
+        }
+
+        .btn-danger {
+            background: #F44336;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #D32F2F;
+        }
+
+        .nav-item {
+            padding: 10px 15px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .nav-item:hover {
+            background: #f0f0f0;
+        }
+
+        .nav-item.active {
+            background: #2196F3;
+            color: white;
+        }
+
+        .grid-item {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .grid-item:hover {
+            background: #e9ecef;
+            transform: scale(1.05);
+        }
+
+        .icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .color-palette {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .color-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .style-card {
+                margin-bottom: 20px;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>UI设计原型 - 5种不同风格方案</h1>
+            <p>网页版UI设计展示 - 响应式布局</p>
+        </div>
+
+        <!-- 方案一：现代简约风格 -->
+        <div class="style-card modern-style">
+            <h2 class="style-title" style="color: #2196F3;">方案一：现代简约风格</h2>
+            
+            <div class="color-palette">
+                <div class="color-box" style="background: #FFFFFF;"></div>
+                <div class="color-box" style="background: #F5F5F5;"></div>
+                <div class="color-box" style="background: #2196F3;"></div>
+                <div class="color-box" style="background: #333333;"></div>
+            </div>
+            
+            <div style="display: flex; gap: 20px; margin-top: 20px;">
+                <div class="modern-sidebar" style="width: 250px;">
+                    <div class="nav-item active">首页</div>
+                    <div class="nav-item">功能模块</div>
+                    <div class="nav-item">数据分析</div>
+                    <div class="nav-item">设置</div>
+                </div>
+                
+                <div style="flex: 1;">
+                    <div class="modern-header">
+                        <div>Logo</div>
+                        <div>用户头像</div>
+                    </div>
+                    
+                    <div class="modern-content">
+                        <div class="modern-card">
+                            <h3>主内容区域</h3>
+                            <p>这里是主要内容展示区，采用简洁的卡片式布局，确保信息层次清晰。</p>
+                        </div>
+                        
+                        <div class="modern-card">
+                            <h3>数据展示</h3>
+                            <p>支持各种数据可视化组件，如表格、图表等。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 方案二：材质设计风格 -->
+        <div class="style-card material-style">
+            <h2 class="style-title" style="color: #673AB7;">方案二：材质设计风格</h2>
+            
+            <div class="color-palette">
+                <div class="color-box" style="background: #FFFFFF;"></div>
+                <div class="color-box" style="background: #E0E0E0;"></div>
+                <div class="color-box" style="background: #673AB7;"></div>
+                <div class="color-box" style="background: #212121;"></div>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <div class="material-header">
+                    <div>应用标题</div>
+                    <div>操作按钮</div>
+                </div>
+                
+                <div style="padding: 20px;">
+                    <div class="material-card">
+                        <h3>内容卡片 1</h3>
+                        <p>材质设计风格强调深度和层次感，使用阴影和 elevation 来创建视觉层次。</p>
+                    </div>
+                    
+                    <div class="material-card">
+                        <h3>内容卡片 2</h3>
+                        <p>动态反馈和自然运动是材质设计的重要特征。</p>
+                    </div>
+                </div>
+                
+                <div class="fab">+</div>
+            </div>
+        </div>
+
+        <!-- 方案三：扁平化设计风格 -->
+        <div class="style-card flat-style">
+            <h2 class="style-title" style="color: #FF5722;">方案三：扁平化设计风格</h2>
+            
+            <div class="color-palette">
+                <div class="color-box" style="background: #FAFAFA;"></div>
+                <div class="color-box" style="background: #E0E0E0;"></div>
+                <div class="color-box" style="background: #FF5722;"></div>
+                <div class="color-box" style="background: #212121;"></div>
+            </div>
+            
+            <div class="flat-header">
+                <div>扁平化设计</div>
+            </div>
+            
+            <div class="flat-grid">
+                <div class="flat-card">
+                    <div class="icon">📊</div>
+                    <h3>数据统计</h3>
+                    <p>简洁的几何形状和纯色块设计</p>
+                </div>
+                
+                <div class="flat-card">
+                    <div class="icon">📱</div>
+                    <h3>响应式布局</h3>
+                    <p>适应不同屏幕尺寸</p>
+                </div>
+                
+                <div class="flat-card">
+                    <div class="icon">🎨</div>
+                    <h3>色彩块设计</h3>
+                    <p>大胆的色彩运用</p>
+                </div>
+                
+                <div class="flat-card">
+                    <div class="icon">✨</div>
+                    <h3>图标动画</h3>
+                    <p>简洁的线性图标</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 方案四：暗黑模式风格 -->
+        <div class="style-card dark-style">
+            <h2 class="style-title" style="color: #BB86FC;">方案四：暗黑模式风格</h2>
+            
+            <div class="color-palette">
+                <div class="color-box" style="background: #121212;"></div>
+                <div class="color-box" style="background: #1E1E1E;"></div>
+                <div class="color-box" style="background: #BB86FC;"></div>
+                <div class="color-box" style="background: #FFFFFF;"></div>
+            </div>
+            
+            <div class="dark-header">
+                <div>暗黑模式界面</div>
+            </div>
+            
+            <div style="padding: 20px;">
+                <div class="dark-card">
+                    <h3 style="color: #BB86FC;">深色主题设计</h3>
+                    <p>减少眼睛疲劳，适合长时间使用</p>
+                </div>
+                
+                <div class="dark-card">
+                    <h3 style="color: #BB86FC;">高对比度文字</h3>
+                    <p>确保在低亮度环境下可读性</p>
+                </div>
+                
+                <div class="dark-card">
+                    <h3 style="color: #BB86FC;">霓虹效果</h3>
+                    <p>强调重要元素，增加科技感</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 方案五：卡片式设计风格 -->
+        <div class="style-card card-style">
+            <h2 class="style-title" style="color: #4CAF50;">方案五：卡片式设计风格</h2>
+            
+            <div class="color-palette">
+                <div class="color-box" style="background: #FFFFFF;"></div>
+                <div class="color-box" style="background: #F5F5F5;"></div>
+                <div class="color-box" style="background: #4CAF50;"></div>
+                <div class="color-box" style="background: #333333;"></div>
+            </div>
+            
+            <div class="card-header">
+                <div>卡片式设计系统</div>
+            </div>
+            
+            <div class="card-grid">
+                <div class="card-item">
+                    <div class="card-header-content">
+                        <h3>信息卡片 1</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>模块化设计，可组合的信息单元</p>
+                        <p>灵活的布局和丰富的交互</p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary">查看详情</button>
+                        <button class="btn btn-secondary">编辑</button>
+                    </div>
+                </div>
+                
+                <div class="card-item">
+                    <div class="card-header-content">
+                        <h3>信息卡片 2</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>独立的内容容器</p>
+                        <p>响应式网格系统</p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-success">操作</button>
+                        <button class="btn btn-danger">删除</button>
+                    </div>
+                </div>
+                
+                <div class="card-item">
+                    <div class="card-header-content">
+                        <h3>信息卡片 3</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>卡片头部：标题和操作</p>
+                        <p>卡片内容：主要信息</p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary">更多</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
