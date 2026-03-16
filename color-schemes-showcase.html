@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>色彩搭配展示 - 现代化UI设计</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            margin-bottom: 40px;
+        }
+        
+        .title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+        }
+        
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 16px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .tab-btn {
+            padding: 12px 24px;
+            background: transparent;
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            color: #667eea;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .tab-btn:hover {
+            background: rgba(102, 126, 234, 0.1);
+            color: #333;
+        }
+        
+        .tab-btn.active {
+            background: #667eea;
+            color: white;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+        }
+        
+        /* Color Schemes Display */
+        .color-schemes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .color-scheme {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .color-scheme:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        .scheme-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .scheme-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-left: 12px;
+        }
+        
+        .scheme-preview {
+            height: 200px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .scheme-colors {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .color-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .color-box::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            right: -8px;
+            width: 20px;
+            height: 20px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='10' cy='10' r='3' fill='%23333'/%3E%3C/svg%3E");
+        }
+        
+        .scheme-description {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .scheme-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            padding: 5px 12px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        /* Color Schemes */
+        .scheme-1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .scheme-2 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .scheme-3 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .scheme-4 {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        
+        .scheme-5 {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+        
+        .scheme-6 {
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+        }
+        
+        /* Color Palette 1 - 紫蓝搭配 */
+        .palette-1-1 { background: #667eea; }
+        .palette-1-2 { background: #764ba2; }
+        .palette-1-3 { background: #f0f0f0; }
+        .palette-1-4 { background: #333333; }
+        
+        /* Color Palette 2 - 粉红搭配 */
+        .palette-2-1 { background: #f093fb; }
+        .palette-2-2 { background: #f5576c; }
+        .palette-2-3 { background: #fef2f2; }
+        .palette-2-4 { background: #7f1d1d; }
+        
+        /* Color Palette 3 - 蓝绿搭配 */
+        .palette-3-1 { background: #4facfe; }
+        .palette-3-2 { background: #00f2fe; }
+        .palette-3-3 { background: #f0fdf4; }
+        .palette-3-4 { background: #14532d; }
+        
+        /* Color Palette 4 - 绿青搭配 */
+        .palette-4-1 { background: #43e97b; }
+        .palette-4-2 { background: #38f9d7; }
+        .palette-4-3 { background: #f0fdfa; }
+        .palette-4-4 { background: #0f766e; }
+        
+        /* Color Palette 5 - 橙黄搭配 */
+        .palette-5-1 { background: #fa709a; }
+        .palette-5-2 { background: #fee140; }
+        .palette-5-3 { background: #fffbeb; }
+        .palette-5-4 { background: #7c2d12; }
+        
+        /* Color Palette 6 - 青紫搭配 */
+        .palette-6-1 { background: #30cfd0; }
+        .palette-6-2 { background: #330867; }
+        .palette-6-3 { background: #f0f9ff; }
+        .palette-6-4 { background: #1e3a8a; }
+        
+        /* Product Layout Preview */
+        .product-preview {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-top: 30px;
+        }
+        
+        .preview-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .preview-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .preview-item {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .preview-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .preview-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .preview-text {
+            font-size: 0.95rem;
+            color: #666;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .color-schemes {
+                grid-template-columns: 1fr;
+            }
+            
+            .preview-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="title">色彩搭配展示</h1>
+            <p class="subtitle">探索6种精心搭配的色彩方案，每个都有独特的色调组合</p>
+        </div>
+        
+        <!-- Tab Navigation -->
+        <div class="tab-nav">
+            <button class="tab-btn active" data-scheme="1">紫蓝搭配</button>
+            <button class="tab-btn" data-scheme="2">粉红搭配</button>
+            <button class="tab-btn" data-scheme="3">蓝绿搭配</button>
+            <button class="tab-btn" data-scheme="4">绿青搭配</button>
+            <button class="tab-btn" data-scheme="5">橙黄搭配</button>
+            <button class="tab-btn" data-scheme="6">青紫搭配</button>
+        </div>
+        
+        <!-- Color Schemes Display -->
+        <div class="color-schemes">
+            <!-- Scheme 1 -->
+            <div class="color-scheme scheme-1">
+                <div class="scheme-header">
+                    <div class="scheme-preview scheme-1"></div>
+                    <h2 class="scheme-title">紫蓝渐变方案</h2>
+                </div>
+                <div class="scheme-colors">
+                    <div class="color-box palette-1-1"></div>
+                    <div class="color-box palette-1-2"></div>
+                    <div class="color-box palette-1-3"></div>
+                    <div class="color-box palette-1-4"></div>
+                </div>
+                <p class="scheme-description">专业、高端的紫蓝配色方案，适合科技、企业类产品。主色调为#667eea和#764ba2，搭配中性色和深色，营造稳重专业的氛围。</p>
+                <div class="scheme-tags">
+                    <span class="tag">科技感</span>
+                    <span class="tag">专业</span>
+                    <span class="tag">企业</span>
+                </div>
+            </div>
+            
+            <!-- Scheme 2 -->
+            <div class="color-scheme scheme-2">
+                <div class="scheme-header">
+                    <div class="scheme-preview scheme-2"></div>
+                    <h2 class="scheme-title">粉红渐变方案</h2>
+                </div>
+                <div class="scheme-colors">
+                    <div class="color-box palette-2-1"></div>
+                    <div class="color-box palette-2-2"></div>
+                    <div class="color-box palette-2-3"></div>
+                    <div class="color-box palette-2-4"></div>
+                </div>
+                <p class="scheme-description">温暖、友好的粉红配色方案，适合女性化、时尚类产品。主色调为#f093fb和#f5576c，搭配浅粉和深红，营造温馨浪漫的氛围。</p>
+                <div class="scheme-tags">
+                    <span class="tag">时尚</span>
+                    <span class="tag">女性化</span>
+                    <span class="tag">温馨</span>
+                </div>
+            </div>
+            
+            <!-- Scheme 3 -->
+            <div class="color-scheme scheme-3">
+                <div class="scheme-header">
+                    <div class="scheme-preview scheme-3"></div>
+                    <h2 class="scheme-title">蓝绿渐变方案</h2>
+                </div>
+                <div class="scheme-colors">
+                    <div class="color-box palette-3-1"></div>
+                    <div class="color-box palette-3-2"></div>
+                    <div class="color-box palette-3-3"></div>
+                    <div class="color-box palette-3-4"></div>
+                </div>
+                <p class="scheme-description">清新、自然的蓝绿配色方案，适合健康、环保类产品。主色调为#4facfe和#00f2fe，搭配浅绿和深绿，营造清新自然的氛围。</p>
+                <div class="scheme-tags">
+                    <span class="tag">清新</span>
+                    <span class="tag">自然</span>
+                    <span class="tag">健康</span>
+                </div>
+            </div>
+            
+            <!-- Scheme 4 -->
+            <div class="color-scheme scheme-4">
+                <div class="scheme-header">
+                    <div class="scheme-preview scheme-4"></div>
+                    <h2 class="scheme-title">绿青渐变方案</h2>
+                </div>
+                <div class="scheme-colors">
+                    <div class="color-box palette-4-1"></div>
+                    <div class="color-box palette-4-2"></div>
+                    <div class="color-box palette-4-3"></div>
+                    <div class="color-box palette-4-4"></div>
+                </div>
+                <p class="scheme-description">生机、活力的绿青配色方案，适合教育、创意类产品。主色调为#43e97b和#38f9d7，搭配浅青和深青，营造充满活力的氛围。</p>
+                <div class="scheme-tags">
+                    <span class="tag">活力</span>
+                    <span class="tag">创意</span>
+                    <span class="tag">教育</span>
+                </div>
+            </div>
+            
+            <!-- Scheme 5 -->
+            <div class="color-scheme scheme-5">
+                <div class="scheme-header">
+                    <div class="scheme-preview scheme-5"></div>
+                    <h2 class="scheme-title">橙黄渐变方案</h2>
+                </div>
+                <div class="scheme-colors">
+                    <div class="color-box palette-5-1"></div>
+                    <div class="color-box palette-5-2"></div>
+                    <div class="color-box palette-5-3"></div>
+                    <div class="color-box palette-5-4"></div>
+                </div>
+                <p class="scheme-description">热情、活力的橙黄配色方案，适合创意、娱乐类产品。主色调为#fa709a和#fee140，搭配浅黄和深橙，营造热情奔放的氛围。</p>
+                <div class="scheme-tags">
+                    <span class="tag">热情</span>
+                    <span class="tag">创意</span>
+                    <span class="tag">娱乐</span>
+                </div>
+            </div>
+            
+            <!-- Scheme 6 -->
+            <div class="color-scheme scheme-6">
+                <div class="scheme-header">
+                    <div class="scheme-preview scheme-6"></div>
+                    <h2 class="scheme-title">青紫渐变方案</h2>
+                </div>
+                <div class="scheme-colors">
+                    <div class="color-box palette-6-1"></div>
+                    <div class="color-box palette-6-2"></div>
+                    <div class="color-box palette-6-3"></div>
+                    <div class="color-box palette-6-4"></div>
+                </div>
+                <p class="scheme-description">神秘、艺术的青紫配色方案，适合艺术、设计类产品。主色调为#30cfd0和#330867，搭配浅蓝和深紫，营造神秘艺术的氛围。</p>
+                <div class="scheme-tags">
+                    <span class="tag">艺术</span>
+                    <span class="tag">神秘</span>
+                    <span class="tag">设计</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Product Layout Preview -->
+        <div class="product-preview">
+            <h3 class="preview-title">产品布局预览</h3>
+            <div class="preview-content">
+                <div class="preview-item">
+                    <div class="preview-icon">📱</div>
+                    <p class="preview-text">响应式设计</p>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-icon">🎨</div>
+                    <p class="preview-text">色彩协调</p>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-icon">📊</div>
+                    <p class="preview-text">数据展示</p>
+                </div>
+                <div class="preview-item">
+                    <div class="preview-icon">🎯</div>
+                    <p class="preview-text">用户交互</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Tab switching functionality
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
