@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学习平台 - 专业UI设计</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header with professional styling */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 0;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .header-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Tab Navigation with modern styling */
+        .tab-nav {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+        }
+        
+        .tab-btn {
+            padding: 14px 28px;
+            background: transparent;
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            color: #667eea;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1.05rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tab-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+        
+        .tab-btn:hover {
+            color: white;
+            border-color: transparent;
+        }
+        
+        .tab-btn:hover::before {
+            width: 100%;
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        /* Main Content Grid */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        /* Professional Cards */
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+        
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            margin-right: 16px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        /* Conversation Panel */
+        .conversation-panel .card {
+            background: #f8f9fa;
+        }
+        
+        .conversation-item {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            margin-bottom: 16px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+            border-left: 4px solid #667eea;
+        }
+        
+        .conversation-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .conv-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            margin-right: 16px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            box-shadow: 0 3px 8px rgba(102, 126, 234, 0.3);
+        }
+        
+        .conv-info {
+            flex: 1;
+        }
+        
+        .conv-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .conv-time {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .conv-preview {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        /* Statistics Panel */
+        .stats-panel {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border-top: 4px solid #667eea;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-title {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .stat-title::before {
+            content: '📊';
+            font-size: 1.1rem;
+        }
+        
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat-change {
+            font-size: 0.9rem;
+            color: #28a745;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .stat-change::before {
+            content: '↑';
+        }
+        
+        /* Review Panel */
+        .review-panel .card {
+            background: #f8f9fa;
+        }
+        
+        .review-item {
+            display: flex;
+            align-items: center;
+            padding: 18px;
+            margin-bottom: 18px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+        
+        .review-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .review-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            margin-right: 18px;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+        }
+        
+        .review-info {
+            flex: 1;
+        }
+        
+        .review-title-text {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 6px;
+        }
+        
+        .review-progress {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        
+        /* Color Schemes */
+        .color-scheme-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .color-scheme-2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .color-scheme-3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .color-scheme-4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .color-scheme-5 { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .color-scheme-6 { background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); }
+        
+        .conv-scheme-1 { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .conv-scheme-2 { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .conv-scheme-3 { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .conv-scheme-4 { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+        .conv-scheme-5 { background: linear-gradient(135deg, #fa709a, #fee140); }
+        .conv-scheme-6 { background: linear-gradient(135deg, #30cfd0, #330867); }
+        
+        .stat-scheme-1 { border-top-color: #667eea; }
+        .stat-scheme-2 { border-top-color: #f093fb; }
+        .stat-scheme-3 { border-top-color: #4facfe; }
+        .stat-scheme-4 { border-top-color: #43e97b; }
+        .stat-scheme-5 { border-top-color: #fa709a; }
+        .stat-scheme-6 { border-top-color: #30cfd0; }
+        
+        .review-scheme-1 { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .review-scheme-2 { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .review-scheme-3 { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .review-scheme-4 { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+        .review-scheme-5 { background: linear-gradient(135deg, #fa709a, #fee140); }
+        .review-scheme-6 { background: linear-gradient(135deg, #30cfd0, #330867); }
+        
+        .progress-scheme-1 { background: linear-gradient(90deg, #667eea, #764ba2); }
+        .progress-scheme-2 { background: linear-gradient(90deg, #f093fb, #f5576c); }
+        .progress-scheme-3 { background: linear-gradient(90deg, #4facfe, #00f2fe); }
+        .progress-scheme-4 { background: linear-gradient(90deg, #43e97b, #38f9d7); }
+        .progress-scheme-5 { background: linear-gradient(90deg, #fa709a, #fee140); }
+        .progress-scheme-6 { background: linear-gradient(90deg, #30cfd0, #330867); }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-panel {
+                grid-template-columns: 1fr;
+            }
+            
+            .title {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <h1 class="title">学习平台</h1>
+                <p class="subtitle">现代化UI设计展示 - 专业色彩搭配与布局</p>
+            </div>
+        </div>
+        
+        <!-- Tab Navigation -->
+        <div class="tab-nav">
+            <button class="tab-btn active" data-scheme="1">紫蓝渐变</button>
+            <button class="tab-btn" data-scheme="2">粉红渐变</button>
+            <button class="tab-btn" data-scheme="3">蓝绿渐变</button>
+            <button class="tab-btn" data-scheme="4">绿青渐变</button>
+            <button class="tab-btn" data-scheme="5">橙黄渐变</button>
+            <button class="tab-btn" data-scheme="6">青紫渐变</button>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Panel -->
+            <div class="left-panel">
+                <!-- Conversation Panel -->
+                <div class="card conversation-panel">
+                    <div class="card-header">
+                        <div class="card-icon">💬</div>
+                        <h2 class="card-title">最近会话</h2>
+                    </div>
+                    <div class="conversation-item">
+                        <div class="conv-avatar conv-scheme-1">A</div>
+                        <div class="conv-info">
+                            <div class="conv-name">AI助手</div>
+                            <div class="conv-time">2分钟前</div>
+                            <div class="conv-preview">你的学习进度很好，继续保持！</div>
+                        </div>
+                    </div>
+                    <div class="conversation-item">
+                        <div class="conv-avatar conv-scheme-1">T</div>
+                        <div class="conv-info">
+                            <div class="conv-name">老师</div>
+                            <div class="conv-time">1小时前</div>
+                            <div class="conv-preview">今天的作业已经批改完成</div>
+                        </div>
+                    </div>
+                    <div class="conversation-item">
+                        <div class="conv-avatar conv-scheme-1">G</div>
+                        <div class="conv-info">
+                            <div class="conv-name">学习小组</div>
+                            <div class="conv-time">3小时前</div>
+                            <div class="conv-preview">明天有测验，记得复习</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Review Panel -->
+                <div class="card review-panel">
+                    <div class="card-header">
+                        <div class="card-icon">📚</div>
+                        <h2 class="card-title">复习进度</h2>
+                    </div>
+                    <div class="review-item">
+                        <div class="review-icon review-scheme-1">📖</div>
+                        <div class="conv-info">
+                            <div class="review-title-text">数学基础</div>
+                            <div class="review-progress">
+                                <div class="progress-bar progress-scheme-1" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-item">
+                        <div class="review-icon review-scheme-1">🔬</div>
+                        <div class="conv-info">
+                            <div class="review-title-text">科学实验</div>
+                            <div class="review-progress">
+                                <div class="progress-bar progress-scheme-1" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-item">
+                        <div class="review-icon review-scheme-1">✍️</div>
+                        <div class="conv-info">
+                            <div class="review-title-text">写作技巧</div>
+                            <div class="review-progress">
+                                <div class="progress-bar progress-scheme-1" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Panel - Statistics -->
+            <div class="stats-panel">
+                <div class="stat-card stat-scheme-1">
+                    <div class="stat-title">今日学习时长</div>
+                    <div class="stat-value">4.5小时</div>
+                    <div class="stat-change">↑ 比昨天多30分钟</div>
+                </div>
+                <div class="stat-card stat-scheme-1">
+                    <div class="stat-title">完成课程</div>
+                    <div class="stat-value">12节</div>
+                    <div class="stat-change">↑ 本周新增3节</div>
+                </div>
+                <div class="stat-card stat-scheme-1">
+                    <div class="stat-title">测验成绩</div>
+                    <div class="stat-value">92分</div>
+                    <div class="stat-change">↑ 优秀水平</div>
+                </div>
+                <div class="stat-card stat-scheme-1">
+                    <div class="stat-title">学习天数</div>
+                    <div class="stat-value">156天</div>
+                    <div class="stat-change">↑ 连续30天</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Tab switching functionality
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const body = document.body;
+        
+        const colorSchemes = {
+            1: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            2: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+            3: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+            4: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+            5: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+            6: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)'
+        };
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Get the scheme number
+                const scheme = button.dataset.scheme;
+                
+                // Change body background
+                body.style.background = colorSchemes[scheme];
+                
+                // Update all color elements
+                updateColorElements(scheme);
+            });
+        });
+        
+        function updateColorElements(scheme) {
+            // Update conversation avatars
+            const convAvatars = document.querySelectorAll('.conv-avatar');
+            convAvatars.forEach(avatar => {
+                avatar.className = `conv-avatar conv-scheme-${scheme}`;
+            });
+            
+            // Update review icons
+            const reviewIcons = document.querySelectorAll('.review-icon');
+            reviewIcons.forEach(icon => {
+                icon.className = `review-icon review-scheme-${scheme}`;
+            });
+            
+            // Update progress bars
+            const progressBars = document.querySelectorAll('.progress-bar');
+            progressBars.forEach(bar => {
+                bar.className = `progress-bar progress-scheme-${scheme}`;
+            });
+            
+            // Update stat cards
+            const statCards = document.querySelectorAll('.stat-card');
+            statCards.forEach(card => {
+                card.className = `stat-card stat-scheme-${scheme}`;
+            });
+        }
+    </script>
+</body>
+</html>
