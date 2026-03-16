@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学习平台 - 现代化UI设计</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            transition: background 0.5s ease;
+            color: white;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px 20px;
+            border-radius: 16px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .tab-btn {
+            padding: 12px 24px;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .tab-btn.active {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Product Layout - Glassmorphism */
+        .product-layout {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            min-height: 700px;
+        }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        /* Glass Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .panel-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Conversation Items */
+        .conversation-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .conversation-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .conv-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            margin-right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .conv-info {
+            flex: 1;
+        }
+        
+        .conv-name {
+            font-weight: 600;
+            color: white;
+            margin-bottom: 4px;
+        }
+        
+        .conv-time {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .conv-preview {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.4;
+        }
+        
+        /* Statistics Panel */
+        .stats-panel {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px);
+        }
+        
+        .stat-title {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 12px;
+        }
+        
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+        }
+        
+        .stat-change {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* Review Items */
+        .review-item {
+            display: flex;
+            align-items: center;
+            padding: 18px;
+            margin-bottom: 18px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .review-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .review-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            margin-right: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .review-title-text {
+            font-weight: 600;
+            color: white;
+            margin-bottom: 6px;
+        }
+        
+        .review-progress {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        
+        /* Color Schemes */
+        .color-scheme-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .color-scheme-2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .color-scheme-3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .color-scheme-4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .color-scheme-5 { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .color-scheme-6 { background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Tab Navigation -->
+        <div class="tab-nav">
+            <button class="tab-btn active" data-scheme="1">紫蓝渐变</button>
+            <button class="tab-btn" data-scheme="2">粉红渐变</button>
+            <button class="tab-btn" data-scheme="3">蓝绿渐变</button>
+            <button class="tab-btn" data-scheme="4">绿青渐变</button>
+            <button class="tab-btn" data-scheme="5">橙黄渐变</button>
+            <button class="tab-btn" data-scheme="6">青紫渐变</button>
+        </div>
+        
+        <!-- Product Layout -->
+        <div class="product-layout">
+            <!-- Header -->
+            <div class="header">
+                <div class="logo">学习平台</div>
+                <div class="user-profile">
+                    <span>欢迎回来，用户</span>
+                    <div class="avatar">U</div>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Left Panel -->
+                <div class="left-panel">
+                    <!-- Conversation Panel -->
+                    <div class="glass-card">
+                        <h3 class="panel-title">💬 最近会话</h3>
+                        <div class="conversation-item">
+                            <div class="conv-avatar">A</div>
+                            <div class="conv-info">
+                                <div class="conv-name">AI助手</div>
+                                <div class="conv-time">2分钟前</div>
+                                <div class="conv-preview">你的学习进度很好，继续保持！</div>
+                            </div>
+                        </div>
+                        <div class="conversation-item">
+                            <div class="conv-avatar">T</div>
+                            <div class="conv-info">
+                                <div class="conv-name">老师</div>
+                                <div class="conv-time">1小时前</div>
+                                <div class="conv-preview">今天的作业已经批改完成</div>
+                            </div>
+                        </div>
+                        <div class="conversation-item">
+                            <div class="conv-avatar">G</div>
+                            <div class="conv-info">
+                                <div class="conv-name">学习小组</div>
+                                <div class="conv-time">3小时前</div>
+                                <div class="conv-preview">明天有测验，记得复习</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Review Panel -->
+                    <div class="glass-card" style="margin-top: 25px;">
+                        <h3 class="panel-title">📚 复习进度</h3>
+                        <div class="review-item">
+                            <div class="review-icon">📖</div>
+                            <div class="conv-info">
+                                <div class="review-title-text">数学基础</div>
+                                <div class="review-progress">
+                                    <div class="progress-bar" style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-icon">🔬</div>
+                            <div class="conv-info">
+                                <div class="review-title-text">科学实验</div>
+                                <div class="review-progress">
+                                    <div class="progress-bar" style="width: 60%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-icon">✍️</div>
+                            <div class="conv-info">
+                                <div class="review-title-text">写作技巧</div>
+                                <div class="review-progress">
+                                    <div class="progress-bar" style="width: 90%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Panel - Statistics -->
+                <div class="stats-panel">
+                    <div class="stat-card">
+                        <div class="stat-title">今日学习时长</div>
+                        <div class="stat-value">4.5小时</div>
+                        <div class="stat-change">↑ 比昨天多30分钟</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">完成课程</div>
+                        <div class="stat-value">12节</div>
+                        <div class="stat-change">↑ 本周新增3节</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">测验成绩</div>
+                        <div class="stat-value">92分</div>
+                        <div class="stat-change">↑ 优秀水平</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">学习天数</div>
+                        <div class="stat-value">156天</div>
+                        <div class="stat-change">↑ 连续30天</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Tab switching functionality
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const body = document.body;
+        
+        const colorSchemes = {
+            1: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            2: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+            3: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+            4: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+            5: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+            6: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)'
+        };
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Get the scheme number
+                const scheme = button.dataset.scheme;
+                
+                // Change body background
+                body.style.background = colorSchemes[scheme];
+            });
+        });
+    </script>
+</body>
+</html>
