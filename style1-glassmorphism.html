@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>玻璃态设计 - 现代化UI展示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0;
+            color: white;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .glass-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #fff;
+            font-weight: 600;
+        }
+        
+        .color-scheme {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .color-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+        
+        .color-box:hover {
+            transform: scale(1.05);
+        }
+        
+        .glass-elements {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .glass-element {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .glass-element:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.02);
+        }
+        
+        .element-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .element-title {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .element-desc {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+        
+        /* 玻璃态颜色方案 */
+        .color-1 { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .color-2 { background: linear-gradient(135deg, #f093fb, #f5576c); }
+        .color-3 { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .color-4 { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+        .color-5 { background: linear-gradient(135deg, #fa709a, #fee140); }
+        .color-6 { background: linear-gradient(135deg, #30cfd0, #330867); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>玻璃态设计</h1>
+            <p class="subtitle">透明模糊效果与现代化色彩搭配</p>
+        </header>
+        
+        <div class="glass-cards">
+            <div class="glass-card">
+                <h2 class="card-title">优雅紫蓝方案</h2>
+                <div class="color-scheme">
+                    <div class="color-box color-1">#667eea</div>
+                    <div class="color-box color-1" style="opacity: 0.8">#764ba2</div>
+                    <div class="color-box" style="background: rgba(255,255,255,0.9); color: #667eea">#FFFFFF</div>
+                </div>
+                <p>适合高端、科技感强的设计，营造神秘而优雅的氛围。</p>
+            </div>
+            
+            <div class="glass-card">
+                <h2 class="card-title">活力粉红方案</h2>
+                <div class="color-scheme">
+                    <div class="color-box color-2">#f093fb</div>
+                    <div class="color-box color-2" style="opacity: 0.8">#f5576c</div>
+                    <div class="color-box" style="background: rgba(255,255,255,0.9); color: #f093fb">#FFFFFF</div>
+                </div>
+                <p>适合女性化、时尚的设计，充满活力与浪漫气息。</p>
+            </div>
+            
+            <div class="glass-card">
+                <h2 class="card-title">清新蓝绿方案</h2>
+                <div class="color-scheme">
+                    <div class="color-box color-3">#4facfe</div>
+                    <div class="color-box color-3" style="opacity: 0.8">#00f2fe</div>
+                    <div class="color-box" style="background: rgba(255,255,255,0.9); color: #4facfe">#FFFFFF</div>
+                </div>
+                <p>适合清新、自然的界面，给人宁静舒适的感觉。</p>
+            </div>
+        </div>
+        
+        <div class="glass-elements">
+            <div class="glass-element">
+                <div class="element-icon">🎨</div>
+                <h3 class="element-title">主色调</h3>
+                <p class="element-desc">选择2-3个协调的渐变色彩</p>
+            </div>
+            
+            <div class="glass-element">
+                <div class="element-icon">🔍</div>
+                <h3 class="element-title">透明度</h3>
+                <p class="element-desc">25-40%的透明度最佳</p>
+            </div>
+            
+            <div class="glass-element">
+                <div class="element-icon">🎭</div>
+                <h3 class="element-title">模糊效果</h3>
+                <p class="element-desc">5-15px的模糊度</p>
+            </div>
+            
+            <div class="glass-element">
+                <div class="element-icon">✨</div>
+                <h3 class="element-title">光晕效果</h3>
+                <p class="element-desc">添加 subtle 的阴影</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>玻璃态设计 © 2026 | 现代化UI展示</p>
+        </footer>
+    </div>
+</body>
+</html>
